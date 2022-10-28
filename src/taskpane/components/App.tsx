@@ -91,6 +91,21 @@ export default class App extends React.Component<AppProps, AppState> {
       console.error(error);
     }
   };
+  setSelectedCustomProperties = async () => {
+    try {
+      await Excel.run(async (context) => {
+        const range = context.workbook.getSelectedRange();
+        range.load("address");
+        await context.sync();
+
+        const properties = context.workbook.properties.custom;
+        properties.add(`${range.address}`, "range address value");
+        await context.sync();
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   render() {
     const { title, isOfficeInitialized } = this.props;
 
@@ -127,6 +142,13 @@ export default class App extends React.Component<AppProps, AppState> {
             onClick={this.getCustomProperties}
           >
             Get Custom Properties
+          </DefaultButton>
+          <DefaultButton
+            className="ms-welcome__action"
+            iconProps={{ iconName: "ChevronRight" }}
+            onClick={this.setSelectedCustomProperties}
+          >
+            Set Selected Custom Properties
           </DefaultButton>
         </HeroList>
       </div>
