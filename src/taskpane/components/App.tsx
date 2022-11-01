@@ -3,6 +3,7 @@ import { DefaultButton } from "@fluentui/react";
 import Header from "./Header";
 import HeroList, { HeroListItem } from "./HeroList";
 import Progress from "./Progress";
+import Home from "./Home";
 
 /* global console, Excel, require  */
 
@@ -151,6 +152,7 @@ export default class App extends React.Component<AppProps, AppState> {
             Set Selected Custom Properties
           </DefaultButton>
         </HeroList>
+        <Home />
       </div>
     );
   }
